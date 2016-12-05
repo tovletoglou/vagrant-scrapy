@@ -1,0 +1,20 @@
+# Vagrant folders
+.vagrant*
+
+# The public key (copied during Vagrant provision)
+*.pub
+
+# Project's temporary folder
+tmp/
+
+# IDE PHPstorm files
+.idea
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
