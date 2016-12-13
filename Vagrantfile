@@ -6,45 +6,42 @@
 # ------------------------------------------------------------------------------
 
 # Define the VM's hostname.
-SCRAPY_HOSTNAME  = "scrapy.dev"
+SCRAPY_HOSTNAME = 'scrapy.dev'.freeze
 
 # Define the VM's IP.
 # Warning! Do not choose an IP that overlaps with any other IP space on
 # your system. This can cause the network not be reachable.
-SCRAPY_IP  = "192.168.33.100"
+SCRAPY_IP = '192.168.33.100'.freeze
 
 # ------------------------------------------------------------------------------
 # Vagrant configuration (do not edit unless you know what you are doing)
 # ------------------------------------------------------------------------------
 
 # Minimum tested version.
-Vagrant.require_version ">= 1.8.6"
+Vagrant.require_version '>= 1.8.6'
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-Vagrant.configure("2") do |config|
-
+Vagrant.configure('2') do |config|
   # ----------------------------------------------------------------------------
   # Global configuration (apply to all VMs)
   # ----------------------------------------------------------------------------
 
   # Disable shared folders.
-  config.vm.synced_folder ".", "/vagrant", type: "vboxsf", disabled: true
+  config.vm.synced_folder '.', '/vagrant', type: 'vboxsf', disabled: true
 
   # Provider-specific configuration (for VirtualBox)
-  config.vm.provider "virtualbox" do |vb|
-
+  config.vm.provider 'virtualbox' do |vb|
     # Display the VirtualBox GUI when booting the machine
     vb.gui = false
 
     # Customize the amount of memory on the VM:
-    vb.memory = "1024"
+    vb.memory = '1024'
 
     # Customize the amount of CPUs on the VM:
     vb.cpus = 1
-
   end
 
   # Enable forwarding SSH agent on guest VM.
@@ -72,8 +69,7 @@ Vagrant.configure("2") do |config|
   # ----------------------------------------------------------------------------
 
   # Run shell provisioner on every VM.
-  config.vm.provision "shell" do |s|
-
+  config.vm.provision 'shell' do |s|
     # Read your local/host's public SSH key `~/.ssh/id_rsa.pub`.
     SSH_PUBLIC_KEY = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
 
@@ -89,7 +85,6 @@ Vagrant.configure("2") do |config|
       echo "#{SCRAPY_IP} #{SCRAPY_HOSTNAME}" >> /etc/hosts
 
     SHELL
-
   end
 
   # ----------------------------------------------------------------------------
@@ -97,22 +92,20 @@ Vagrant.configure("2") do |config|
   # ----------------------------------------------------------------------------
 
   # Scrapy Server --------------------------------------------------------------
-  config.vm.define "scrapy" do |scrapy|
-
+  config.vm.define 'scrapy' do |scrapy|
     # Every Vagrant development environment requires a box. We use the official
     # Centos 7 box form atlas: https://atlas.hashicorp.com/centos/boxes/7
-    scrapy.vm.box = "centos/7"
+    scrapy.vm.box = 'centos/7'
 
     # The hostname the machine should have.
     scrapy.vm.hostname = SCRAPY_HOSTNAME
 
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.
-    scrapy.vm.network "private_network", ip: SCRAPY_IP
+    scrapy.vm.network 'private_network', ip: SCRAPY_IP
 
     # Provision guest VM using Vagrant's shell provisioner.
-    scrapy.vm.provision "shell" do |s|
-
+    scrapy.vm.provision 'shell' do |s|
       # bash commands.
       s.inline = <<-SHELL
 
@@ -153,7 +146,6 @@ Vagrant.configure("2") do |config|
         chown -R vagrant:vagrant /home/vagrant/ansible-playbook-scrapy
 
       SHELL
-
     end
 
     # Print message after VM creation.
@@ -163,7 +155,5 @@ Vagrant.configure("2") do |config|
     IP:       #{SCRAPY_IP}
     Hostname: #{SCRAPY_HOSTNAME}
     -------------------------"
-
   end
-
 end
