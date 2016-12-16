@@ -154,6 +154,11 @@ Vagrant.configure('2') do |config|
     Scrapy server is ready
     IP:       #{SCRAPY_IP}
     Hostname: #{SCRAPY_HOSTNAME}
+
+    If it's the first time you `vagrant up` this VM please run as administrator
+    the script: `initialize.sh`.
+    If you are not running this script on Windows thru MINGW32 or any other
+    Linux-like shell you should replicate the actions manually.
     -------------------------"
   end
 end

@@ -15,7 +15,7 @@ Map on your/host `hosts` file the IP of the guest VM. Edit the `C:\Windows\Syste
 192.168.33.100 scrapy.dev
 ```
 
-Run the `after-boot-script.sh` script
+Run the `after-boot-script.sh` script (it runs only on MINGW32 or Linux-like shells).
 
 ```
 ./after-boot-script.sh
@@ -31,7 +31,7 @@ ssh vagrant@scrapy.dev
 vagrant ssh
 ```
 
-Run the ansible provisioning inside the VM
+Run the Ansible provisioning inside the VM.
 
 ```
 cd /home/vagrant/ansible-playbook-scrapy/
