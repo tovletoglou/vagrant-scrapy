@@ -18,7 +18,7 @@
 3. Add on host's `known_hosts` the public key of the guest VM.
 
   ```
-  ssh-keyscan -t rsa $i 2>&1 | \grep -v '#' | sort -u - ~/.ssh/known_hosts > ~/.ssh/tmp_known_hosts
+  ssh-keyscan -t rsa scrapy.dev,192.168.33.100 2>&1 | \grep -v '#' | sort -u - ~/.ssh/known_hosts > ~/.ssh/tmp_known_hosts
   mv ~/.ssh/tmp_known_hosts ~/.ssh/known_hosts
   ```
 
@@ -51,8 +51,26 @@
   ansible-playbook -i hosts playbook_scrapy.yml
   ```
 
+## Info
+
 If you are executing the commands on Windows under `MINGW32` or any other Linux-like shells (strongly suggested to work on [bash-git-for-windows](https://git-scm.com/download/win)) you can run the `after-boot-script.sh` script (it replicates the steps 2 to 4)
 
 ```
 ./after-boot-script.sh
+```
+
+**Important**
+
+On Vagrant 1.9.1 there is a bug <https://github.com/mitchellh/vagrant/issues/8096> related to Centos that it doesn't allow the network interface to restart automatically.
+
+Login with `vagrant ssh` after the initial `vagrant up` and restart the VM:
+
+```
+[user@host vagrant-scrapy]$ vagrant up
+# ...
+[user@host vagrant-scrapy]$ vagrant ssh
+[vagrant@scrapy ~]$ sudo sudo systemctl restart network
+[vagrant@scrapy ~]$ exit
+# Now you can login normally
+[user@host vagrant-scrapy]$ ssh vagrant@scrapy.dev
 ```
