@@ -17,7 +17,7 @@ echo -e "\n\033[0;36mBackup host's hosts file\033[0m"
 cp "$HOSTS_FILE" ./tmp/backup-hosts
 
 # ==============================================================================
-# Update host's hosts file (need to run as root/administrator).
+# Update host's `hosts` file (need to run as root/administrator).
 
 echo -e "\n\033[0;36mUpdate host's hosts file (need to run as root/administrator).\033[0m"
 
@@ -36,7 +36,7 @@ do
 done
 
 # ==============================================================================
-# Add on host's known_hosts the public key of the guest VMs.
+# Add on host's `known_hosts` the public key of the guest VMs.
 
 echo -e "\n\033[0;36mAdd on host's known_hosts the public key of the guest VMs.\033[0m"
 
@@ -55,14 +55,13 @@ do
 done
 
 # ==============================================================================
-# Copy the scrapy.dev public key to the host, in order to push it on the clients.
+# Copy the `scrapy.dev` public key to the host, in order to push it on the clients.
 
 echo -e "\n\033[0;36mCopy the scrapy.dev public key to the host, in order to push it on the clients.\033[0m"
 scp vagrant@scrapy.dev:/home/vagrant/.ssh/id_rsa.pub ./tmp/scrapy_server_id_rsa.pub
 
 # ==============================================================================
-# Add the scrapy.dev public key on the known_hosts of clients.
+# Add the `scrapy.dev` public key on the `known_hosts` of clients.
 
 echo -e "\n\033[0;36mAdd the scrapy.dev public key on the known_hosts of clients.\033[0m"
-
 ssh vagrant@scrapy.dev "cat >> /home/vagrant/.ssh/authorized_keys" < ./tmp/scrapy_server_id_rsa.pub
