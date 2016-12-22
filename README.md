@@ -53,10 +53,10 @@
 
 ## Info
 
-If you are executing the commands on Windows under `MINGW32` or any other Linux-like shells (strongly suggested to work on [bash-git-for-windows](https://git-scm.com/download/win)) you can run the `after-boot-script.sh` script (it replicates the steps 2 to 4)
+If you are executing the commands on Windows under `MINGW32` or any other Linux-like shells (strongly suggested to work on [bash-git-for-windows](https://git-scm.com/download/win)) you can run the `initialize.sh` script (it replicates the steps 2 to 4)
 
 ```
-./after-boot-script.sh
+./initialize.sh
 ```
 
 **Important**
@@ -69,7 +69,7 @@ Login with `vagrant ssh` after the initial `vagrant up` and restart the VM:
 [user@host vagrant-scrapy]$ vagrant up
 # ...
 [user@host vagrant-scrapy]$ vagrant ssh
-[vagrant@scrapy ~]$ sudo sudo systemctl restart network
+[vagrant@scrapy ~]$ sudo systemctl restart network
 [vagrant@scrapy ~]$ exit
 # Now you can login normally
 [user@host vagrant-scrapy]$ ssh vagrant@scrapy.dev
